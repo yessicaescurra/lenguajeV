@@ -1,0 +1,7 @@
+{
+  "name": "lenguajeV-crud",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
