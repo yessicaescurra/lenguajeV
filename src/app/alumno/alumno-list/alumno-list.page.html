@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Lista de Alumnos</ion-title>
+    <ion-buttons slot="end">
+      <ion-row>
+        <ion-button (click)="nuevoAlumno()">
+          NUEVO
+        </ion-button>
+      </ion-row>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-searchbar [(ngModel)]="filtro" [hidden]="!showSearch" (ionCancel)="toggleSearch()" (ionChange)="filtrarLista()">
+  </ion-searchbar>
+
+  <ion-list lines="full">
+    <ion-item *ngFor="let alumno of listaAlumnos">
+      <ion-label>{{alumno.codigo}}-{{alumno.nombre}} {{alumno.apellido}}</ion-label>
+      <!-- Botón de editar a la derecha con fondo amarillo -->
+      <ion-button slot="end" fill="clear" [routerLink]="'/alumno-edit/' + alumno.id" style="background-color: yellow;">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+
+      <!-- Botón de eliminar -->
+      <ion-button slot="end" fill="clear" (click)="confirmarEliminar(alumno.id)" color="danger">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+

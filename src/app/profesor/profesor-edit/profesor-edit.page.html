@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{isNew ? 'Nuevo' : 'Editar'}} Profesor</ion-title>
+
+      <ion-buttons slot="primary">
+
+        <ion-button fill="solid" (click)="guardarProfesor()" color="primary">
+          Guardar
+        </ion-button>
+        <ion-button *ngIf="!isNew" fill="solid" (click)="eliminarProfesor()" color="danger">
+          <ion-icon slot="end" name="trash"></ion-icon>
+        </ion-button>
+      
+      </ion-buttons>
+ 
+  </ion-toolbar>
+</ion-header>
+
+<<ion-content [fullscreen]="true">
+ 
+  <ion-list>
+    <ion-item>
+      <ion-label>ID#</ion-label>
+      <ion-input [(ngModel)]="id" readonly="true" disabled="true"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Código:</ion-label>
+      <ion-input [(ngModel)]="profesor.codigo" type="number" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Nombre:</ion-label>
+      <ion-input [(ngModel)]="profesor.nombre" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Apellido:</ion-label>
+      <ion-input [(ngModel)]="profesor.apellido" required></ion-input>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

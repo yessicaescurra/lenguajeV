@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "lenguajev-crud": {
+      "hosting": {
+        "app": [
+          "lenguajev-crud"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "lenguajev-crud"
+  }
+}

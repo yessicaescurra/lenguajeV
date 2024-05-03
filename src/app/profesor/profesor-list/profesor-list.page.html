@@ -1,0 +1,24 @@
+<ion-header [translucent]="true" class="ion-text-center">
+  <ion-toolbar>
+    <ion-title>Lista de Profesores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list lines="full">
+    <ion-item 
+      [routerLink]="['/profesor-edit/' + profesor.id]" 
+      
+      *ngFor="let profesor of listaProfesor">
+      <ion-label>{{profesor.codigo}} - {{profesor.nombre}} 
+        {{profesor.apellido}}</ion-label>
+       <!-- <ion-icon name="eye"></ion-icon>-->
+    </ion-item>
+  </ion-list>
+  
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [routerLink]="['/profesor-edit/new']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

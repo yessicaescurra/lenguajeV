@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/alumno-list" text="">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-back-button>
+      </ion-buttons>
+      <ion-title>Registrar Alumnos</ion-title>
+
+      <ion-buttons slot="primary">
+        <ion-button fill="solid" (click)="crearAlumno()">
+          Guardar
+          <!--<ion-icon slot="end" name="save-outline"></ion-icon>--> 
+        </ion-button>
+      </ion-buttons>
+
+    </ion-toolbar>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Código</ion-label>
+      <ion-input type="text" [(ngModel)]="alumno.codigo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="alumno.nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input type="text" [(ngModel)]="alumno.apellido"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>

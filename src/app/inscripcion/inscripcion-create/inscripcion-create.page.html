@@ -1,0 +1,60 @@
+<ion-content [fullscreen]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inscripcion-list" text="">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrar Inscripción</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button fill="solid" (click)="crearInscripcion()">
+        Guardar
+        <!--<ion-icon slot="end" name="save-outline"></ion-icon>--> 
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+
+<ion-list>
+  <ion-item>
+    <ion-label position="floating">Cédula</ion-label>
+    <ion-input type="text" [(ngModel)]="inscripcion.ci"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input type="text" [(ngModel)]="inscripcion.nombre"></ion-input>
+  </ion-item>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-select [(ngModel)]="inscripcion.estado">
+        <ion-select-option value="true">Activo</ion-select-option>
+        <ion-select-option value="false">Inactivo</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label position="floating">Dirección</ion-label>
+    <ion-input type="text" [(ngModel)]="inscripcion.direccion"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Teléfono</ion-label>
+    <ion-input type="text" [(ngModel)]="inscripcion.telefono"></ion-input>
+  </ion-item>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Fecha</ion-label>
+      <ion-input type="text" [(ngModel)]="inscripcion.fecha" readonly></ion-input>
+    </ion-item>
+  </ion-list>
+  
+  
+
+</ion-list>
+</ion-content>

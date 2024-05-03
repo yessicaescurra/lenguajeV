@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/alumno-list" text="">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Editar Alumno</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button fill="solid" (click)="editarAlumno()">
+      Guardar
+        <!--<ion-icon slot="end" name="save-outline"></ion-icon>-->
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-list>
+
+    <ion-item style="display: none;">
+      <ion-label>ID</ion-label>
+      <ion-input
+      [(ngModel)]="id" readonly="true" disabled="true">
+      </ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Codigo</ion-label>
+      <ion-input
+      [(ngModel)]="alumno.codigo">
+
+      </ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input
+      [(ngModel)]="alumno.nombre">
+
+      </ion-input>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Apellido</ion-label>
+      <ion-input
+      [(ngModel)]="alumno.apellido">
+
+      </ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
