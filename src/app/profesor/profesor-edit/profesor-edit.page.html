@@ -1,34 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="#">
-      </ion-back-button>
+      <ion-back-button default-href="/profesor-list"></ion-back-button>
     </ion-buttons>
 
     <ion-title>{{isNew ? 'Nuevo' : 'Editar'}} Profesor</ion-title>
 
-      <ion-buttons slot="primary">
-
-        <ion-button fill="solid" (click)="guardarProfesor()" color="primary">
-          Guardar
-        </ion-button>
-        <ion-button *ngIf="!isNew" fill="solid" (click)="eliminarProfesor()" color="danger">
-          <ion-icon slot="end" name="trash"></ion-icon>
-        </ion-button>
-      
-      </ion-buttons>
- 
+    <ion-buttons slot="primary">
+      <ion-button fill="solid" (click)="guardarProfesor()" color="primary">
+        Guardar
+      </ion-button>
+      <ion-button *ngIf="!isNew" fill="solid" (click)="eliminarProfesor()" color="danger">
+        <ion-icon slot="end" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<<ion-content [fullscreen]="true">
- 
+<ion-content [fullscreen]="true">
+
   <ion-list>
     <ion-item>
       <ion-label>ID#</ion-label>
       <ion-input [(ngModel)]="id" readonly="true" disabled="true"></ion-input>
     </ion-item>
-    
+
     <ion-item>
       <ion-label>Código:</ion-label>
       <ion-input [(ngModel)]="profesor.codigo" type="number" required></ion-input>
@@ -43,6 +39,22 @@
       <ion-label>Apellido:</ion-label>
       <ion-input [(ngModel)]="profesor.apellido" required></ion-input>
     </ion-item>
+
+  <ion-item>
+      <img [src]="avatar" alt="">
+    </ion-item>
+
+
+  <ion-item>
+      <label for="fileUpload">Imagen</label>
+      <input type="file" (change)="onFileSelected($event)" #upload>
+      <button (click)="triggerFileInput()">Subir</button>
+      <button (click)="eliminarAvatar()">Eliminar Avatar</button>
+  </ion-item>
+
+
+
+
   </ion-list>
-  
 </ion-content>
+

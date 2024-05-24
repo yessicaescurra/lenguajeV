@@ -21,16 +21,12 @@ export class ProfesorListPage implements OnInit {
     this.listarProfesor();
   }
 
- /* listarProfesor = () => {
-    console.log("listar profesor");
-    const profesorRef = collection(this.firestore, 'profesor');
-  collectionData(profesorRef, { idField: 'id'}).subscribe(respuesta=>{
-      console.log("estos son los profesor", respuesta);
-      this.listaProfesor=respuesta; 
-    });
-  
-
-  }*/
+  ionViewWillEnter() {
+    console.log("gfsgfdsfds")
+    this.listaProfesor = [];
+    this.ultimoProfesorRecuperado = null;
+    this.listarProfesor();
+  }
 
   listarProfesorSinFiltro = () => {
     console.log("listar profesor");
@@ -84,13 +80,24 @@ export class ProfesorListPage implements OnInit {
 
       getDocs(q).then(re => {
         if (!re.empty){
-          //this.stAt +=this.li;
-          this.ultimoProfesorRecuperado = re.docs[re.docs.length-1];
-            re.forEach(doc => {
-              let profesor : any=doc.data();
-              profesor.id = doc.id;
-              this.listaProfesor.push(profesor);
-            });
+          let nuevoArray = new Array();
+
+          for (let i = 0; i < re.docs.length; i++){
+            const doc : any = re.docs[i].data();
+            if(doc.nombre.toUpperCase().startsWith(this.query.toUpperCase().charAt(0))
+            ){
+              nuevoArray.push(re.docs[i])
+            }
+          }
+
+          this.ultimoProfesorRecuperado = re.docs[nuevoArray.length-1];
+          for (let i = 0; i < nuevoArray.length; i++  ){
+            const doc : any = nuevoArray[i];
+            let profesor : any = doc.data();
+            profesor.id = doc.id;
+            this.listaProfesor.push(profesor);
+
+          }
 
         }
       });
@@ -100,6 +107,7 @@ export class ProfesorListPage implements OnInit {
     }
 
   }
+
 
 
   onIonInfinite(ev: any) {
