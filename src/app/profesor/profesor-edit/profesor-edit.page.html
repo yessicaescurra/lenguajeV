@@ -20,7 +20,7 @@
 <ion-content [fullscreen]="true">
 
   <ion-list>
-    <ion-item>
+    <ion-item style="display: none;">
       <ion-label>ID#</ion-label>
       <ion-input [(ngModel)]="id" readonly="true" disabled="true"></ion-input>
     </ion-item>
@@ -40,20 +40,25 @@
       <ion-input [(ngModel)]="profesor.apellido" required></ion-input>
     </ion-item>
 
-  <ion-item>
-      <img [src]="avatar" alt="">
+    <ion-item>
+      <ion-label>Fecha de Nacimiento:</ion-label>
+      <ion-input type="date"
+        [(ngModel)]="profesor.fecha">
+      </ion-input>
     </ion-item>
 
-
-  <ion-item>
-      <label for="fileUpload">Imagen</label>
-      <input type="file" (change)="onFileSelected($event)" #upload>
-      <button (click)="triggerFileInput()">Subir</button>
-      <button (click)="eliminarAvatar()">Eliminar Avatar</button>
+  <ion-item class="avatar-container">
+    <img [src]="avatar" alt="Avatar" class="avatar-image">
   </ion-item>
 
-
-
+  <ion-item lines="none" class="avatar-upload">
+    <ion-label for="fileUpload">Perfil:</ion-label>
+    <input type="file" (change)="onFileSelected($event)" #fileInput hidden>
+    <div class="button-container">
+      <ion-button color="primary" (click)="triggerFileInput()">Subir</ion-button>
+      <ion-button color="danger" (click)="eliminarAvatar()">Eliminar Avatar</ion-button>
+    </div>
+  </ion-item>
 
   </ion-list>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { collection, addDoc, updateDoc, Firestore, doc, getDoc, deleteDoc } from '@angular/fire/firestore';
+import { collection, addDoc, updateDoc, Firestore, doc, getDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
 import { getDownloadURL, uploadBytesResumable, Storage, ref, deleteObject } from '@angular/fire/storage';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -16,6 +16,7 @@ export class ProfesorEditPage implements OnInit {
   isNew: boolean = false;
   profesor: any = {};
   avatar: string = ''; // agregado 17.05
+  fecha: Date = new Date();
 
   constructor(
     private readonly firestore: Firestore,
@@ -86,7 +87,8 @@ export class ProfesorEditPage implements OnInit {
       codigo: this.profesor.codigo,
       nombre: this.profesor.nombre,
       apellido: this.profesor.apellido,
-      avatar: this.avatar // Asegúrate de que el avatar se actualiza
+      avatar: this.avatar,
+      fecha : new Date(this.profesor.fecha)
     }).then(() => {
       console.log("Registro Editado");
       this.presentSuccessAlert();
@@ -155,7 +157,8 @@ export class ProfesorEditPage implements OnInit {
       codigo: this.profesor.codigo,
       nombre: this.profesor.nombre,
       apellido: this.profesor.apellido,
-      avatar: this.avatar // Asegúrate de que el avatar se incluye
+      avatar: this.avatar,
+      fecha: new Date(this.profesor.fecha),
     }).then(() => {
       console.log("Registro Incluido");
       this.presentSuccessAlert();
@@ -203,18 +206,60 @@ export class ProfesorEditPage implements OnInit {
     const document = doc(this.firestore, "profesor", id);
     getDoc(document).then(doc => {
       console.log("Registro a editar", doc.data());
-      this.profesor = doc.data() || {};
-      if (this.profesor.avatar) {
-        this.avatar = this.profesor.avatar; // Asegúrate de que el avatar se establece al obtener el profesor
+      if (doc.data()) {
+        this.profesor = doc.data();
+
+        this.profesor.fecha = this.profesor.fecha.toDate()?.toISOString()
+        .substring(0, 10)+"";
+        //this.profesor.fecha = this.profesor.fecha.toISOString().substring(0, 10);
+
+        if (this.profesor.avatar) {
+         // this.avatar = this.profesor.avatar;
+          this.obtenerAvatarProfesor();
+        }else{
+          this.profesor = {};
+        }
       }
     }).catch(error => {
       console.error("Error al obtener profesor", error);
     });
   }
 
-  eliminarAvatar() {
+
+ obtenerAvatarProfesor = () => {
+  const storageRef = ref(this.storage, `avatars/profesor/${this.id}`);
+  getDownloadURL(storageRef).then(doc => {
+    this.avatar = doc;
+   });
+
+  }
+
+
+  async eliminarAvatar() {
     if (!this.avatar) return;
 
+    const alert = await this.alertController.create({
+      header: 'Confirmar eliminación',
+      message: '¿Estás seguro de eliminar este avatar?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Eliminar',
+          handler: () => {
+            // Eliminar el avatar
+            this.confirmarEliminacionAvatar();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async confirmarEliminacionAvatar() {
     const storageRef = ref(this.storage, `avatars/profesor/${this.id}`);
     deleteObject(storageRef).then(() => {
       console.log("Avatar eliminado del storage");
@@ -232,4 +277,5 @@ export class ProfesorEditPage implements OnInit {
       console.error("Error al eliminar avatar del storage", error);
     });
   }
+
 }

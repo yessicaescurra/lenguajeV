@@ -1,0 +1,61 @@
+.avatar-img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 10px auto;
+    border: 2px solid #ccc;
+  }
+  
+  ion-item.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  ion-button {
+    --padding-start: 10px;
+    --padding-end: 10px;
+  }
+  
+  ion-button[color="primary"] {
+    --background: #007bff;
+    --background-hover: #0056b3;
+    --background-activated: #0056b3;
+    color: #fff;
+  }
+  
+  ion-button[color="danger"] {
+    --background: #dc3545;
+    --background-hover: #c82333;
+    --background-activated: #bd2130;
+    color: #fff;
+  }
+
+
+  .avatar-upload {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar-upload ion-label {
+    flex: 1;
+  }
+  
+  .avatar-upload .button-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .avatar-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .avatar-image {
+    max-width: 100px; /* Ajusta el tamaño máximo de la imagen según tus preferencias */
+    max-height: 100px; /* Ajusta el tamaño máximo de la imagen según tus preferencias */
+  }
+  
